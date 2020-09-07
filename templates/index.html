@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-signin-client_id" content="503311980244-getoef3nssa4hno18ajt8thjgsnt8v2n.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <title>Google Sign In</title>
+</head>
+<body>
+    Welcome to CodeBlog!
+    <br>
+    <br>
+    <div class="g-signin2" data-onsuccess="OnSignIn"></div>
+    <br><br><br>
+    Name: <div id="name"></div>
+    <br>
+    Email: <div id="email"></div>
+    <br>
+    <br>
+    <button onclick="SignOut()">Sign Out</button>
+    <br>
+
+    <h5>Credit <a href="https://www.youtube.com/watch?v=KwOmVpd1DUA">Danny Aslam-Perez</a></h5>
+
+    <script>
+        function OnSignIn(googleUser){
+            console.log('User is ' + JSON.stringify(googleUser.getBasicProfile().getName()));
+            var gname = googleUser.getBasicProfile().getName();
+            var gemail = googleUser.getBasicProfile().getEmail();
+
+            var name = document.querySelector("#name");
+            name.innerText = gname;
+
+            var email = document.querySelector("#email");
+            email.innerText = gemail;
+        }
+
+        function SignOut(){
+            gapi.auth2.getAuthInstance().signOut().then(function(){
+                console.log("User Logged Out");
+            });
+        }
+    </script>
+</body>
+</html>
